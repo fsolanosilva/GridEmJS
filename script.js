@@ -1,20 +1,22 @@
+
+let data = [
+    { id: 1, name: 'John Doe', email: 'john@example.com' },
+    { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
+    { id: 3, name: 'May jen', email: 'jane@example.com' },
+    { id: 4, name: 'Ronald rekin', email: 'jane@example.com' },
+    { id: 5, name: 'Bille doe', email: 'jane@example.com' },
+    { id: 6, name: 'Mariana Ximen', email: 'jane@example.com' },
+    { id: 7, name: 'Zack Efron', email: 'jane@example.com' },
+    { id: 8, name: 'Jhon Kenedy', email: 'jane@example.com' },
+    { id: 9, name: 'Jhon Areas', email: 'jane@example.com' },
+    { id: 10, name: 'Vini Junir', email: 'jane@example.com' },
+    { id: 11, name: 'Neymar Junior', email: 'jane@example.com' },
+    { id: 12, name: 'Marilin Joe', email: 'jane@example.com' },
+    // Adicione mais objetos conforme necessário
+];
+
 document.addEventListener('DOMContentLoaded', function () {
     // Exemplo de dados, substitua com seus próprios dados
-    const data = [
-        { id: 1, name: 'John Doe', email: 'john@example.com' },
-        { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
-        { id: 3, name: 'May jen', email: 'jane@example.com' },
-        { id: 4, name: 'Ronald rekin', email: 'jane@example.com' },
-        { id: 5, name: 'Bille doe', email: 'jane@example.com' },
-        { id: 6, name: 'Mariana Ximen', email: 'jane@example.com' },
-        { id: 7, name: 'Zack Efron', email: 'jane@example.com' },
-        { id: 8, name: 'Jhon Kenedy', email: 'jane@example.com' },
-        { id: 9, name: 'Jhon Areas', email: 'jane@example.com' },
-        { id: 10, name: 'Vini Junir', email: 'jane@example.com' },
-        { id: 11, name: 'Neymar Junior', email: 'jane@example.com' },
-        { id: 12, name: 'Marilin Joe', email: 'jane@example.com' },
-        // Adicione mais objetos conforme necessário
-    ];
 
     const itemsPerPage = 5;
     let currentPage = 1;
@@ -100,7 +102,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleHeaderClick(column) {
-        if (currentColumn === column && headers[headers.length - 1] !== column) {
+        const lastColumnIndex = headers.length - 1;
+
+        if (currentColumn === column && headers[lastColumnIndex].getAttribute('data-column') !== 'options') {
             toggleOrder();
         } else {
             currentColumn = column;
