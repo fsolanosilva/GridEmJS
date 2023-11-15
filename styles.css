@@ -94,3 +94,21 @@ body {
     display: flex;
 }
 
+/*registros por pagina*/
+.pagination-flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.records-per-page {
+    margin-left: auto;
+    /* Move para a direita */
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    /* Ajuste conforme necessário para o espaçamento desejado */
+}
+
+.records-per-page label {
+    margin-right: 5px;
+}

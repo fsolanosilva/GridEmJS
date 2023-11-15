@@ -32,12 +32,25 @@
                 <!-- Dados serão adicionados dinamicamente aqui -->
             </tbody>
         </table>
-        <div id="pagination-container">
+
+        <div id="pagination-container" class="pagination-flex-container">
+            <!-- ... (botões de navegação) ... -->
             <button id="first-page-btn" class="pagination-button">&lt;&lt;</button>
             <button id="prev-btn" class="pagination-button">&lt;</button>
             <span id="current-page" class="pagination-button">1</span>
             <button id="next-btn" class="pagination-button">&gt;</button>
             <button id="last-page-btn" class="pagination-button">&gt;&gt;</button>
+
+            <!-- Seletor de Registros por Página -->
+            <div class="records-per-page">
+                <label for="recordsPerPage">Registros por Página:</label>
+                <select id="recordsPerPage" class="form-control">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <!-- Adicione mais opções conforme necessário -->
+                </select>
+            </div>
         </div>
 
         <script src="script.js"></script>

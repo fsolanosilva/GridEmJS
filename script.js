@@ -17,7 +17,7 @@ let data = [
 document.addEventListener('DOMContentLoaded', function () {
     // Exemplo de dados, substitua com seus próprios dados
 
-    const itemsPerPage = 5;
+    let itemsPerPage = 5;
     let currentPage = 1;
     let currentColumn = 'id';
     let currentOrder = 'asc';
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstPageBtn = document.getElementById('first-page-btn');
     const lastPageBtn = document.getElementById('last-page-btn');
     const currentPageSpan = document.getElementById('current-page');
+    const recordsPerPageSelect = document.getElementById('recordsPerPage');
 
     function createOptionsButtons() {
         const editButton = document.createElement('button');
@@ -47,7 +48,14 @@ document.addEventListener('DOMContentLoaded', function () {
         return optionsCell;
     }
 
-    // script.js
+    // Adicione um evento de mudança ao seletor de registros por página
+    document.getElementById('recordsPerPage').addEventListener('change', function () {
+        // Atualize o valor de itemsPerPage
+        itemsPerPage = parseInt(this.value, 10);
+        currentPage = 1;
+        displayData();
+        updatePaginationButtons();
+    });
 
     // ... (seu código anterior)
 
