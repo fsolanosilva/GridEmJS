@@ -15,23 +15,24 @@
     <body>
         <p class="mt-4 text-center font-weight-bold display-5">Exemplo de Data
             Grid Feito na Mão por Solano</p>
-
-        <table id="data-grid" class="table">
-            <thead>
-                <tr>
-                    <th data-column="id" data-order="asc">ID <span
-                            class="sort-icon">&uarr;&darr;</span></th>
-                    <th data-column="name" data-order="asc">Name <span
-                            class="sort-icon">&uarr;&darr;</span></th>
-                    <th data-column="email" data-order="asc">Email <span
-                            class="sort-icon">&uarr;&darr;</span></th>
-                    <th data-column="options" data-order="asc">Opções </th>
-                </tr>
-            </thead>
-            <tbody id="data-body">
-                <!-- Dados serão adicionados dinamicamente aqui -->
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table id="data-grid" class="table">
+                <thead>
+                    <tr>
+                        <th data-column="id" data-order="asc">ID <span
+                                class="sort-icon">&uarr;&darr;</span></th>
+                        <th data-column="name" data-order="asc">Name <span
+                                class="sort-icon">&uarr;&darr;</span></th>
+                        <th data-column="email" data-order="asc">Email <span
+                                class="sort-icon">&uarr;&darr;</span></th>
+                        <th data-column="options" data-order="asc">Opções </th>
+                    </tr>
+                </thead>
+                <tbody id="data-body">
+                    <!-- Dados serão adicionados dinamicamente aqui -->
+                </tbody>
+            </table>
+        </div>
         <div id="pagination-container">
             <button id="first-page-btn" class="pagination-button">&lt;&lt;</button>
             <button id="prev-btn" class="pagination-button">&lt;</button>
