@@ -25,7 +25,7 @@
                             class="sort-icon">&uarr;&darr;</span></th>
                     <th data-column="email" data-order="asc">Email <span
                             class="sort-icon">&uarr;&darr;</span></th>
-                    <th data-column="options" data-order="asc">Opções </th>
+                    <th data-column="options" data-order="asc">Opções</th>
                 </tr>
             </thead>
             <tbody id="data-body">
@@ -48,8 +48,43 @@
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
-
                 </select>
+            </div>
+        </div>
+
+        <!-- Modal de Edição -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+            aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edição do
+                            dado <span id="editModalData"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="editName">Nome:</label>
+                        <input type="text" id="editName"
+                            class="form-control mb-2" />
+
+                        <label for="editEmail">Email:</label>
+                        <input type="text" id="editEmail"
+                            class="form-control mb-2" />
+
+                        <!-- Adicione mais campos conforme necessário -->
+
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary"
+                            id="saveChangesBtn">Salvar</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
             </div>
         </div>
 

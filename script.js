@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${item.email}</td>
             <td class="options-column">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-warning btn-sm ml-1">
+                    <button type="button" class="btn btn-warning btn-sm ml-1" data-toggle="modal" data-target="#editModal" onclick="openEditModal(${item.id}, '${item.name}', '${item.email}')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                             <path d="M11.742 0.742a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-10 10a1 1 0 0 1-0.446 0.279l-4-1a1 1 0 0 1-.554-1.326l1-4a1 1 0 0 1 0.819-0.748l13-3a1 1 0 0 1 1.195 1.195l-3 13a1 1 0 0 1-0.748 0.819l-4 1a1 1 0 0 1-1.326-0.554l-1-4a1 1 0 0 1 0.279-0.446z"/>
                         </svg>
@@ -90,6 +90,35 @@ document.addEventListener('DOMContentLoaded', function () {
             tableBody.appendChild(row);
         });
     }
+
+    function openEditModal(id, name, email) {
+        document.getElementById('editModalData').textContent = name;
+
+        // Preencher os campos de edição da modal com os dados do item
+        document.getElementById('editName').value = name;
+        document.getElementById('editEmail').value = email;
+        document.getElementById('editId').value = id;
+
+        // Adicionar as classes necessárias para mostrar a modal
+        document.getElementById('editModal').classList.add('show', 'd-block');
+
+        // Adicionar a classe 'modal-open' ao body para corrigir o fundo escurecido
+        document.body.classList.add('modal-open');
+
+        // Exibir o fundo escurecido
+        const backdrop = document.createElement('div');
+        backdrop.classList.add('modal-backdrop', 'show');
+        document.body.appendChild(backdrop);
+
+        // Adicionar um evento de clique ao fundo escurecido para fechar a modal
+        backdrop.addEventListener('click', function () {
+            // Remover a modal e o fundo escurecido
+            document.getElementById('editModal').classList.remove('show', 'd-block');
+            document.body.classList.remove('modal-open');
+            backdrop.remove();
+        });
+    }
+
 
 
     function sortData(column, order) {
