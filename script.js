@@ -1,16 +1,16 @@
 let data = [
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
-    { id: 3, name: 'May jen', email: 'jane@example.com' },
-    { id: 4, name: 'Ronald rekin', email: 'jane@example.com' },
-    { id: 5, name: 'Bille doe', email: 'jane@example.com' },
-    { id: 6, name: 'Mariana Ximen', email: 'jane@example.com' },
-    { id: 7, name: 'Zack Efron', email: 'jane@example.com' },
-    { id: 8, name: 'Jhon Kenedy', email: 'jane@example.com' },
-    { id: 9, name: 'Jhon Areas', email: 'jane@example.com' },
-    { id: 10, name: 'Vini Junir', email: 'jane@example.com' },
-    { id: 11, name: 'Neymar Junior', email: 'jane@example.com' },
-    { id: 12, name: 'Marilin Joe', email: 'jane@example.com' },
+    { id: 1, name: 'Marieta Severo', email: 'mServero@exemplo.com.com' },
+    { id: 2, name: 'Ronaldo Fenomeno', email: 'rfen@exemplo.com.com' },
+    { id: 3, name: 'Jão Doria', email: 'jaod@exemplo.com.com' },
+    { id: 4, name: 'Maria Balbe', email: 'mbalbe@exemplo.com.com' },
+    { id: 5, name: 'Jonas van dame', email: 'jonasvd@exemplo.com.com' },
+    { id: 6, name: 'Mariana Rios', email: 'marianar@exemplo.com.com' },
+    { id: 7, name: 'Roberto Carlos', email: 'quandoEuEstouAqui@exemplo.com.com' },
+    { id: 8, name: 'Lucas Lima', email: 'LucasL@exemplo.com.com' },
+    { id: 9, name: 'Osvaldo Andrade', email: 'OsAndrade@exemplo.com.com' },
+    { id: 10, name: 'Vini Junior', email: 'ViniJunior@exemplo.com.com' },
+    { id: 11, name: 'Neymar Junior', email: 'NeyMala@exemplo.com.com' },
+    { id: 12, name: 'Marilin Joe', email: 'MarilinJ@exemplo.com.com' },
     // Adicione mais objetos conforme necessário
 ];
 
@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentColumn = 'id';
     let currentOrder = 'asc';
     let editingCell = null; // Armazena a célula que está sendo editada
+    let draggedColumn; // Armazena a coluna que está sendo arrastada
 
     const tableBody = document.querySelector('#data-grid tbody');
     const headers = document.querySelectorAll('#data-grid th');
@@ -31,6 +32,54 @@ document.addEventListener('DOMContentLoaded', function () {
     const lastPageBtn = document.getElementById('last-page-btn');
     const currentPageSpan = document.getElementById('current-page');
     //const recordsPerPageSelect = document.getElementById('recordsPerPage');
+
+    /**Mover coluna */
+
+    // Adicione um evento de início de arrasto aos cabeçalhos da coluna
+    headers.forEach(header => {
+        header.draggable = true;
+
+        header.addEventListener('dragstart', function (event) {
+            draggedColumn = this;
+            event.dataTransfer.effectAllowed = 'move';
+        });
+
+        header.addEventListener('dragover', function (event) {
+            event.preventDefault();
+        });
+
+        header.addEventListener('drop', function () {
+            const columns = Array.from(headers);
+            const fromIndex = columns.indexOf(draggedColumn);
+            const toIndex = columns.indexOf(this);
+
+            if (fromIndex !== -1 && toIndex !== -1 && fromIndex !== toIndex) {
+                // Mover a coluna no DOM
+                const parent = draggedColumn.parentNode;
+                parent.removeChild(draggedColumn);
+                parent.insertBefore(draggedColumn, toIndex > fromIndex ? this.nextSibling : this);
+
+                // Mover a coluna nos dados
+                moveColumn(fromIndex, toIndex);
+
+                // Redesenha os dados e atualiza a ordenação
+                displayData();
+                sortData(currentColumn, currentOrder);
+                updateHeaders();
+            }
+        });
+    });
+
+    function moveColumn(fromIndex, toIndex) {
+        // Mover a coluna nos dados
+        data.forEach(item => {
+            const temp = item[headers[fromIndex].getAttribute('data-column')];
+            item[headers[fromIndex].getAttribute('data-column')] = item[headers[toIndex].getAttribute('data-column')];
+            item[headers[toIndex].getAttribute('data-column')] = temp;
+        });
+    }
+
+    /**Fim Mover Coluna */
 
     function createOptionsButtons() {
         const editButton = document.createElement('button');
@@ -149,6 +198,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('data-grid').addEventListener('dblclick', handleCellDoubleClick);
 
+    // Ouvinte de eventos de clique ao documento para cancelar a edição ao clicar em qualquer lugar fora do grid
+    document.addEventListener('click', function (event) {
+        const target = event.target;
+
+        // Se o clique não estiver na célula em edição ou nos botões de salvar/cancelar, então cancelar a edição
+        if (editingCell && !editingCell.contains(target) && target.tagName !== 'BUTTON') {
+            cancelEdit();
+        }
+    });
 
     /* fim editando dados no grid*/
 
