@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Data Grid with JavaScript and CSS</title>
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            integrity="sha512-7ekuI/BiVM6AuNE4XTh1enLz5uzI6itPVnlInBoh+3lU+Ysfv9/gZXMNIRFC7H4fj4jbMW8eo6e0Xqmp4Rt4Vg=="
+            crossorigin="anonymous" />
+    </head>
+    <body>
+        <p>Exemplo de data grid feito na mão by Solano</p>
+        <table id="data-grid" class="table">
+            <thead>
+                <tr>
+                    <th data-column="id" data-order="asc">ID <span
+                            class="sort-icon">&uarr;&darr;</span></th>
+                    <th data-column="name" data-order="asc">Name <span
+                            class="sort-icon">&uarr;&darr;</span></th>
+                    <th data-column="email" data-order="asc">Email <span
+                            class="sort-icon">&uarr;&darr;</span></th>
+                    <th data-column="email" data-order="asc">Editar <span
+                            class="sort-icon">&uarr;&darr;</span></th>
+                </tr>
+            </thead>
+            <tbody id="data-body">
+                <!-- Dados serão adicionados dinamicamente aqui -->
+            </tbody>
+        </table>
+        <div id="pagination-container">
+            <button id="first-page-btn" class="pagination-button">&lt;&lt;</button>
+            <button id="prev-btn" class="pagination-button">&lt;</button>
+            <span id="current-page" class="pagination-button">1</span>
+            <button id="next-btn" class="pagination-button">&gt;</button>
+            <button id="last-page-btn" class="pagination-button">&gt;&gt;</button>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
