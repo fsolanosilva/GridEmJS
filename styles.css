@@ -97,7 +97,14 @@ body {
 /*registros por pagina*/
 .pagination-flex-container {
     display: flex;
-    align-items: center;
+    align-items: 
+    center;
+}
+
+.pagination-button.disabled {
+    opacity: 0.5;
+    /* Ou qualquer outra propriedade de estilo que você preferir */
+    cursor: not-allowed;
 }
 
 .records-per-page {

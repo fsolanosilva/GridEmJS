@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return optionsCell;
     }
 
-    // Adicione um evento de mudança ao seletor de registros por página
+    // evento de mudança ao seletor de registros por página
     document.getElementById('recordsPerPage').addEventListener('change', function () {
         // Atualize o valor de itemsPerPage
         itemsPerPage = parseInt(this.value, 10);
@@ -56,8 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
         displayData();
         updatePaginationButtons();
     });
-
-    // ... (seu código anterior)
 
     function displayData() {
         const startIndex = (currentPage - 1) * itemsPerPage;
@@ -92,8 +90,6 @@ document.addEventListener('DOMContentLoaded', function () {
             tableBody.appendChild(row);
         });
     }
-
-    // ... (seu código anterior)
 
 
     function sortData(column, order) {
@@ -145,9 +141,34 @@ document.addEventListener('DOMContentLoaded', function () {
         prevBtn.disabled = currentPage === 1;
         nextBtn.disabled = currentPage === Math.ceil(data.length / itemsPerPage);
         lastPageBtn.disabled = currentPage === Math.ceil(data.length / itemsPerPage);
+
+        // Adicione ou remova a classe "disabled" conforme necessário
+        if (firstPageBtn.disabled) {
+            firstPageBtn.classList.add('disabled');
+        } else {
+            firstPageBtn.classList.remove('disabled');
+        }
+
+        if (prevBtn.disabled) {
+            prevBtn.classList.add('disabled');
+        } else {
+            prevBtn.classList.remove('disabled');
+        }
+
+        if (nextBtn.disabled) {
+            nextBtn.classList.add('disabled');
+        } else {
+            nextBtn.classList.remove('disabled');
+        }
+
+        if (lastPageBtn.disabled) {
+            lastPageBtn.classList.add('disabled');
+        } else {
+            lastPageBtn.classList.remove('disabled');
+        }
     }
 
-    // Adiciona evento de clique aos cabeçalhos da coluna
+    //  evento de clique aos cabeçalhos da coluna
     headers.forEach(header => {
         header.addEventListener('click', function () {
             const column = this.getAttribute('data-column');
@@ -155,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Adiciona evento de clique ao botão "Next"
+    //  evento de clique ao botão "Next"
     nextBtn.addEventListener('click', function () {
         if (currentPage < Math.ceil(data.length / itemsPerPage)) {
             currentPage++;
@@ -164,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Adiciona evento de clique ao botão "Previous"
+    //  evento de clique ao botão "Previous"
     prevBtn.addEventListener('click', function () {
         if (currentPage > 1) {
             currentPage--;
@@ -173,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Adiciona evento de clique ao botão "Ir para a Primeira Página"
+    //  evento de clique ao botão "Ir para a Primeira Página"
     firstPageBtn.addEventListener('click', function () {
         if (currentPage > 1) {
             currentPage = 1;
@@ -182,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Adiciona evento de clique ao botão "Ir para a Última Página"
+    //  evento de clique ao botão "Ir para a Última Página"
     lastPageBtn.addEventListener('click', function () {
         const lastPage = Math.ceil(data.length / itemsPerPage);
         if (currentPage < lastPage) {
