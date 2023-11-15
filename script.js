@@ -117,9 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleHeaderClick(column) {
-        const lastColumnIndex = headers.length - 1;
-
-        if (currentColumn === column && headers[lastColumnIndex].getAttribute('data-column') !== 'options') {
+        if (currentColumn === column) {
             toggleOrder();
         } else {
             currentColumn = column;
