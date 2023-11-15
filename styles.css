@@ -4,11 +4,19 @@ body {
 }
 
 #data-grid {
-    width: 100%;
+    width: 98%;
     border: 1px solid #ddd;
     border-collapse: collapse;
     margin-top: 20px;
     background-color: #fff;
+    margin: 0 15px;
+    /* Adiciona espaçamento nas margens direita e esquerda */
+}
+
+#data-grid th,
+#data-grid td {
+    padding: 8px;
+    text-align: left;
 }
 
 #data-grid th {
@@ -44,8 +52,12 @@ body {
     background-color: #d8b3ff;
 }
 
+/*Navegacao */
+
 #pagination-container {
     margin-top: 20px;
+    margin-left: 15px;
+    /* Adiciona espaçamento à esquerda dos botões */
 }
 
 .pagination-button {
@@ -68,3 +80,17 @@ body {
     border: 1px solid #6f42c1;
     border-radius: 0.25rem;
 }
+
+/* Opções */
+
+#data-grid .options-column {
+    width: 1%;
+    /* Defina a largura mínima desejada para a coluna */
+    white-space: nowrap;
+    /* Impede a quebra de texto */
+}
+
+#data-grid .btn-group {
+    display: flex;
+}
+
