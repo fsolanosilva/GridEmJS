@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 1;
     let currentColumn = 'id';
     let currentOrder = 'asc';
+    let editingCell = null; // Armazena a célula que está sendo editada
 
     const tableBody = document.querySelector('#data-grid tbody');
     const headers = document.querySelectorAll('#data-grid th');
@@ -56,6 +57,100 @@ document.addEventListener('DOMContentLoaded', function () {
         displayData();
         updatePaginationButtons();
     });
+
+    /*Editando celula*/
+    function createInputField(value) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = value;
+        return input;
+    }
+
+    function createSaveButton() {
+        const button = document.createElement('button');
+        button.textContent = 'Salvar';
+        button.classList.add('btn', 'btn-success', 'btn-sm', 'ml-1');
+        button.addEventListener('click', saveChanges);
+        return button;
+    }
+
+    function createCancelButton() {
+        const button = document.createElement('button');
+        button.textContent = 'Cancelar';
+        button.classList.add('btn', 'btn-secondary', 'btn-sm', 'ml-1');
+        button.addEventListener('click', cancelEdit);
+        return button;
+    }
+
+    function saveChanges() {
+        if (editingCell) {
+            const input = editingCell.querySelector('input');
+            const columnIndex = editingCell.cellIndex;
+            const rowIndex = editingCell.parentNode.rowIndex - 1; // -1 para descontar o cabeçalho
+            const propertyName = headers[columnIndex].getAttribute('data-column');
+
+            // Atualizar o valor na matriz de dados
+            data[rowIndex][propertyName] = input.value;
+
+            // Atualizar a exibição
+            displayData();
+        }
+
+        editingCell = null; // Limpar a célula sendo editada
+    }
+
+    function cancelEdit() {
+        if (editingCell) {
+            // Restaurar o conteúdo original da célula
+            const columnIndex = editingCell.cellIndex;
+            const rowIndex = editingCell.parentNode.rowIndex - 1; // -1 para descontar o cabeçalho
+            const propertyName = headers[columnIndex].getAttribute('data-column');
+            const cellData = data[rowIndex][propertyName];
+
+            editingCell.innerHTML = cellData;
+            editingCell = null; // Limpar a célula sendo editada
+        }
+    }
+
+    function handleCellDoubleClick(event) {
+        const clickedCell = event.target;
+
+        // Verificar se a célula clicada é uma célula de dados (não o cabeçalho)
+        if (clickedCell.tagName === 'TD') {
+            // Se já estiver editando uma célula, salve as alterações
+            if (editingCell) {
+                saveChanges();
+            }
+
+            const columnIndex = clickedCell.cellIndex;
+            const rowIndex = clickedCell.parentNode.rowIndex;
+
+            // Evitar editar células da coluna de opções
+            if (columnIndex !== headers.length - 1) {
+                const propertyName = headers[columnIndex].getAttribute('data-column');
+                const cellData = data[rowIndex - 1][propertyName]; // -1 para descontar o cabeçalho
+
+                // Criar um campo de entrada e botões Salvar e Cancelar
+                const inputField = createInputField(cellData);
+                const saveButton = createSaveButton();
+                const cancelButton = createCancelButton();
+
+                // Substituir o conteúdo da célula pelo campo de entrada e botões
+                clickedCell.innerHTML = '';
+                clickedCell.appendChild(inputField);
+                clickedCell.appendChild(saveButton);
+                clickedCell.appendChild(cancelButton);
+
+                // Armazenar a célula que está sendo editada
+                editingCell = clickedCell;
+            }
+        }
+    }
+
+    document.getElementById('data-grid').addEventListener('dblclick', handleCellDoubleClick);
+
+
+    /* fim editando dados no grid*/
 
     function displayData() {
         const startIndex = (currentPage - 1) * itemsPerPage;
