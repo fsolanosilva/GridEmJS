@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstPageBtn = document.getElementById('first-page-btn');
     const lastPageBtn = document.getElementById('last-page-btn');
     const currentPageSpan = document.getElementById('current-page');
-    const recordsPerPageSelect = document.getElementById('recordsPerPage');
+    //const recordsPerPageSelect = document.getElementById('recordsPerPage');
 
     function createOptionsButtons() {
         const editButton = document.createElement('button');
