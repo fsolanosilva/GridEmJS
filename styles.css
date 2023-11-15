@@ -112,3 +112,7 @@ body {
 .records-per-page label {
     margin-right: 5px;
 }
+
+.records-per-page label {
+    white-space: nowrap;
+}
