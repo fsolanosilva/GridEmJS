@@ -66,12 +66,12 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${item.email}</td>
             <td class="options-column">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-warning btn-sm ml-1" data-toggle="tooltip" data-placement="top" title="Editar">
+                    <button type="button" class="btn btn-warning btn-sm ml-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                             <path d="M11.742 0.742a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-10 10a1 1 0 0 1-0.446 0.279l-4-1a1 1 0 0 1-.554-1.326l1-4a1 1 0 0 1 0.819-0.748l13-3a1 1 0 0 1 1.195 1.195l-3 13a1 1 0 0 1-0.748 0.819l-4 1a1 1 0 0 1-1.326-0.554l-1-4a1 1 0 0 1 0.279-0.446z"/>
                         </svg>
                     </button>
-                    <button type="button" class="btn btn-danger btn-sm ml-1" data-toggle="tooltip" data-placement="top" title="Excluir">
+                    <button type="button" class="btn btn-danger btn-sm ml-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                             <path d="M3 1a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v1H3V1zm10 2H0v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zm-1 11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4h9v10z"/>
                             <path d="M5 7a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2H6a1 1 0 0 1-1-1zm0 4a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2H6a1 1 0 0 1-1-1z"/>
@@ -83,15 +83,10 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
             tableBody.appendChild(row);
         });
-
-        // Ativar os tooltips após a renderização dos botões
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
     }
 
-
     // ... (seu código anterior)
+
 
     function sortData(column, order) {
         data.sort((a, b) => {
@@ -122,11 +117,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleHeaderClick(column) {
-        if (currentColumn === column) {
-            // Se o usuário clicar na mesma coluna, alternamos a ordem
-            currentOrder = currentOrder === 'asc' ? 'desc' : 'asc';
+        const lastColumnIndex = headers.length - 1;
+
+        if (currentColumn === column && headers[lastColumnIndex].getAttribute('data-column') !== 'options') {
+            toggleOrder();
         } else {
-            // Se o usuário clicar em uma nova coluna, definimos a coluna e a ordem padrão
             currentColumn = column;
             currentOrder = 'asc';
         }
